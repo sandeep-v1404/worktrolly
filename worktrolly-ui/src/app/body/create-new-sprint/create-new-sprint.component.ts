@@ -58,7 +58,7 @@ export class CreateNewSprintComponent implements OnInit {
   }
 
   async readSprintData(newSprintId: string) {
-    var documentName = "Main/"+ newSprintId;
+    var documentName = "Main/" + newSprintId;
     this.sprintDocument = this.db.doc<RawDataType>(documentName);
     try {
       await this.sprintDocument.ref.get().then(doc => {
@@ -68,7 +68,7 @@ export class CreateNewSprintComponent implements OnInit {
           this.totalBusiness = sprintData.TotalBusinessTask;
           this.totalMarketing = sprintData.TotalMarketingTask;
         }
-        else{
+        else {
           this.totalDevelopment = 0;
           this.totalBusiness = 0;
           this.totalMarketing = 0;
@@ -91,7 +91,7 @@ export class CreateNewSprintComponent implements OnInit {
     const callable = this.functions.httpsCallable('startNewSprint');
 
     try {
-      const result = await callable({ StartDate: this.startDate, EndDate: this.endDate, TotalDevelopment: this.totalDevelopment, TotalBusiness: this.totalBusiness, TotalMarketing: this.totalMarketing, Status: status }).toPromise();
+      const result = await callable({ StartDate: this.startDate, EndDate: this.endDate, TotalDevelopment: this.totalDevelopment, TotalBusiness: this.totalBusiness, TotalMarketing: this.totalMarketing, Status: this.status }).toPromise();
 
       console.log("Successfully created the task");
       console.log(result);
